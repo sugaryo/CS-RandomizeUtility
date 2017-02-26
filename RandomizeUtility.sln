@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomizeUtility", "RandomizeUtility\RandomizeUtility.csproj", "{4C4E9163-020C-4F53-8FDD-14B216FF070D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomizeTestForm", "RandomizeTestForm\RandomizeTestForm.csproj", "{6CE85D42-62AB-4392-B729-0DE1DFCA5DB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C4E9163-020C-4F53-8FDD-14B216FF070D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4E9163-020C-4F53-8FDD-14B216FF070D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4E9163-020C-4F53-8FDD-14B216FF070D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4E9163-020C-4F53-8FDD-14B216FF070D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE85D42-62AB-4392-B729-0DE1DFCA5DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE85D42-62AB-4392-B729-0DE1DFCA5DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE85D42-62AB-4392-B729-0DE1DFCA5DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE85D42-62AB-4392-B729-0DE1DFCA5DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
