@@ -37,11 +37,16 @@ namespace RandomizeTestForm
 			{
 				sb.Clear();
 				
-				RandomizeTest.Test( x =>
-				{
-					Console.WriteLine( x );
-					sb.AppendLine( x );
-				} );
+				RandomizeTest.Test( 
+					x =>
+					{
+						Console.WriteLine( x );
+						sb.AppendLine( x );
+					}, 
+					this.rdoOrderOptionKeepOrigin.Checked 
+						? RandomizeUtility.OrderOptions.KeepOrigin
+						: RandomizeUtility.OrderOptions.Random 
+				);
 
 
 				this.txtOutput.Text = sb.ToString();
@@ -52,9 +57,6 @@ namespace RandomizeTestForm
 				MessageBox.Show( ex.Message );
 			}
         }
-
-        private void btnClear_Click( object sender, EventArgs e )
-        {
-        }
+		
     }
 }

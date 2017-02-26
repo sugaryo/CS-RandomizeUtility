@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace RandomizeUtility
 {
-    public class Randomizer<T>
-    {
+	public enum OrderOptions
+	{
+		KeepOrigin,
+		Random,
+	}
+
+	public class Randomizer<T>
+	{
         private readonly IEnumerable<T> source;
 
         private readonly Random r;
@@ -19,8 +25,22 @@ namespace RandomizeUtility
             this.r = new Random();
         }
 
-        public IEnumerable<T> Randomize( int count )
+        public IEnumerable<T> Randomize( int count, OrderOptions order = OrderOptions.KeepOrigin )
         {
+			IEnumerable<T> random = this.Core( count );
+
+			switch ( order )
+			{
+				case OrderOptions.Random:
+					return random.OrderBy( x => Guid.NewGuid() );
+
+				default:
+					return random;
+			}
+		}
+
+		private IEnumerable<T> Core( int count )
+		{
             if ( count < 0 )
             {
                 return Enumerable.Empty<T>();
@@ -38,7 +58,7 @@ namespace RandomizeUtility
             return step <= 1
                 ? this.Skip( size, size - count )
                 : this.Take( size, count, step );
-        }
+		}
 
         // 指定した回数スキップする列挙：
         private IEnumerable<T> Skip( int size, int count )

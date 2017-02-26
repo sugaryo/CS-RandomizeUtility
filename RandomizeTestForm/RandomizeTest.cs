@@ -48,7 +48,7 @@ namespace RandomizeTestForm
 			Test( x => Console.WriteLine( x ) );
 		}
 
-		public static void Test( Action<string> testaction )
+		public static void Test( Action<string> testaction, OrderOptions order = OrderOptions.KeepOrigin )
 		{
 			var random = new Randomizer<string>( Lines );
 
@@ -60,7 +60,7 @@ namespace RandomizeTestForm
 			{
 				testaction( "■■■■抽出数：" + n.ToString() );
 
-				foreach ( string line in random.Randomize( n ) )
+				foreach ( string line in random.Randomize( n, order ) )
 				{
 					testaction( "    " + line );
 				}
