@@ -33,8 +33,8 @@
 			this.txtLeft = new System.Windows.Forms.TextBox();
 			this.split = new System.Windows.Forms.SplitContainer();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.rdoOrderOptionKeepOrigin = new System.Windows.Forms.RadioButton();
 			this.rdoOrderOptionRandom = new System.Windows.Forms.RadioButton();
+			this.rdoOrderOptionKeepOrigin = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
 			this.split.Panel1.SuspendLayout();
 			this.split.Panel2.SuspendLayout();
@@ -114,6 +114,16 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "並び順オプション";
 			// 
+			// rdoOrderOptionRandom
+			// 
+			this.rdoOrderOptionRandom.AutoSize = true;
+			this.rdoOrderOptionRandom.Location = new System.Drawing.Point(295, 27);
+			this.rdoOrderOptionRandom.Name = "rdoOrderOptionRandom";
+			this.rdoOrderOptionRandom.Size = new System.Drawing.Size(248, 25);
+			this.rdoOrderOptionRandom.TabIndex = 1;
+			this.rdoOrderOptionRandom.Text = "ランダムに並び替える";
+			this.rdoOrderOptionRandom.UseVisualStyleBackColor = true;
+			// 
 			// rdoOrderOptionKeepOrigin
 			// 
 			this.rdoOrderOptionKeepOrigin.AutoSize = true;
@@ -125,16 +135,6 @@
 			this.rdoOrderOptionKeepOrigin.TabStop = true;
 			this.rdoOrderOptionKeepOrigin.Text = "もとの並び順を維持する";
 			this.rdoOrderOptionKeepOrigin.UseVisualStyleBackColor = true;
-			// 
-			// rdoOrderOptionRandom
-			// 
-			this.rdoOrderOptionRandom.AutoSize = true;
-			this.rdoOrderOptionRandom.Location = new System.Drawing.Point(295, 27);
-			this.rdoOrderOptionRandom.Name = "rdoOrderOptionRandom";
-			this.rdoOrderOptionRandom.Size = new System.Drawing.Size(248, 25);
-			this.rdoOrderOptionRandom.TabIndex = 1;
-			this.rdoOrderOptionRandom.Text = "ランダムに並び替える";
-			this.rdoOrderOptionRandom.UseVisualStyleBackColor = true;
 			// 
 			// TestForm
 			// 
@@ -148,7 +148,7 @@
 			this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
 			this.Name = "TestForm";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-			this.Text = "Form1";
+			this.Text = "Randomizer.dll 動作検証画面";
 			this.Load += new System.EventHandler(this.TestForm_Load);
 			this.split.Panel1.ResumeLayout(false);
 			this.split.Panel1.PerformLayout();
