@@ -63,7 +63,9 @@ namespace RandomizeUtility
         // 指定した回数スキップする列挙：
         private IEnumerable<T> Skip( int size, int count )
         {
-            int step = size / count;
+#warning スキップの処理がバグっているので要修正。
+
+			int step = size / count;
             int tail = size - 1;
 
             for ( int n = 0; n < count; n++ )
