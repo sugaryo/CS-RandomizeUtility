@@ -6,26 +6,64 @@ using System.Threading.Tasks;
 
 namespace RandomizeUtility
 {
+	/// <summary>
+	/// ランダマイズ抽出する要素の並び順を指定するオプション
+	/// </summary>
 	public enum OrderOptions
 	{
+		/// <summary>
+		/// 元の並び順を保持する
+		/// </summary>
 		KeepOrigin,
+
+		/// <summary>
+		/// 元の並び順を無視する（ランダムに並べ替える）
+		/// </summary>
 		Random,
 	}
 
 	public class Randomizer<T>
 	{
+		/// <summary>
+		/// ランダム抽出する要素の母体
+		/// </summary>
         private readonly IEnumerable<T> source;
 
+		/// <summary>
+		/// ランダム抽出に使用する乱数ジェネレータ
+		/// </summary>
         private readonly Random r;
 
-        public Randomizer( IEnumerable<T> source )
+		#region ctor
+		/// <param name="source">ランダム抽出する要素の母体</param>
+		public Randomizer( IEnumerable<T> source )
         {
             this.source = source;
-
             this.r = new Random();
         }
+		#endregion
 
-        public IEnumerable<T> Randomize( int count, OrderOptions order = OrderOptions.KeepOrigin )
+
+		/// <summary>
+		/// ランダム抽出
+		/// </summary>
+		/// <remarks>
+		/// このランダマイザに与えられた要素の母体から、指定した要素数だけランダムに抽出します。
+		/// </remarks>
+		/// 
+		/// <param name="count">
+		/// ランダム抽出する要素数。
+		/// 母数がこの要素数に満たない場合は母数全てを抽出します。
+		/// </param>
+		/// <param name="order">
+		/// ランダム抽出した要素の並び順指定。
+		/// デフォルトは OorderOptions.KeepOrigin 
+		/// </param>
+		/// <returns>指定した要素数でランダム抽出した要素の列挙子</returns>
+		/// 
+		/// <see cref="Skip(int, int)"/>
+		/// <see cref="Take(int, int, int)"/>
+		public IEnumerable<T> Randomize( int count, OrderOptions order = OrderOptions.KeepOrigin )
         {
 			IEnumerable<T> random = this.Core( count );
 
@@ -60,7 +98,9 @@ namespace RandomizeUtility
                 : this.Take( size, count, step );
 		}
 
+
         // 指定した回数スキップする列挙：
+
         private IEnumerable<T> Skip( int size, int count )
         {
 #warning スキップの処理がバグっているので要修正。
@@ -68,7 +108,8 @@ namespace RandomizeUtility
 			int step = size / count;
             int tail = size - 1;
 
-            for ( int n = 0; n < count; n++ )
+#warning ここのロジックバグってる、要修正。
+			for ( int n = 0; n < count; n++ )
             {
                 int i = n * step;
                 int d = r.Next( 0, step );
@@ -87,7 +128,9 @@ namespace RandomizeUtility
             }
         }
 
+
         // 指定した回数実行する列挙：
+		
         private IEnumerable<T> Take( int size, int count, int step )
         {
             int tail = size - 1;
