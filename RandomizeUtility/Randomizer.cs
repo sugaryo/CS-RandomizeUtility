@@ -103,9 +103,7 @@ namespace RandomizeUtility
 
         private IEnumerable<T> Skip( int size, int count )
         {
-#warning スキップの処理がバグっているので要修正。
-
-			int step = size / count;
+            int step = size / count;
             int tail = size - 1;
 
 #warning ここのロジックバグってる、要修正。
