@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BlockTest.cs" />
+    <Compile Include="BlockTestDetail.cs" />
     <Compile Include="StdTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
