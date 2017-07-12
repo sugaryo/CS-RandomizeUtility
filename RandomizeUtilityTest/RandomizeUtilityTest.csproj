@@ -52,9 +52,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BlockTest.cs" />
-    <Compile Include="BlockTestCase.cs" />
-    <Compile Include="BlockTestDetail.cs" />
+    <Compile Include="BlockTest\TestSuiteAs.cs" />
+    <Compile Include="BlockTest\TestCase.cs" />
+    <Compile Include="BlockTest\TestSuiteDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

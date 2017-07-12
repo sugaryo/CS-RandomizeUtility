@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RandomizeUtilityTest
+namespace RandomizeUtilityTest.BlockTest
 {
 	/// <summary>
 	/// <seealso cref="RandomizeUtility.Block"/> のテストケース（実行条件）クラス
 	/// </summary>
-	public class BlockTestCase
+	public class TestCase
 	{
 		/// <summary>
 		/// ブロック分割の要素数
@@ -26,7 +26,7 @@ namespace RandomizeUtilityTest
 		/// </summary>
 		/// <param name="s">ブロック分割の要素数</param>
 		/// <param name="n">ブロック分割の分割数</param>
-		public BlockTestCase(int s, int n)
+		public TestCase(int s, int n)
 		{
 			this.S = s;
 			this.N = n;

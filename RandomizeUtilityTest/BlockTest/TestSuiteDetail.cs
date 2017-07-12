@@ -3,28 +3,35 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RandomizeUtility;
 
-namespace RandomizeUtilityTest
+namespace RandomizeUtilityTest.BlockTest
 {
+	/// <summary>
+	/// ブロック分割後の詳細内容をテストする。
+	/// </summary>
+	/// <remarks>
+	/// <seealso cref="TestSuiteAs"/> では、単純に分割数が指定通りかだけを検証するが、
+	/// こっちのテストでは分割ブロックの内容妥当性までを検証する。
+	/// </remarks>
 	[TestClass]
-	public class BlockTestDetail
+	public class TestSuiteDetail
 	{
 		#region 1. 解り易い10個パターン
 		[TestMethod]
 		public void CASE1a_10個2分割()
 		{
-			var test = new BlockTestCase( 10, 2 );
+			var test = new TestCase( 10, 2 );
 			ExecTest( test );
 		}
 		[TestMethod]
 		public void CASE1b_10個10分割()
 		{
-			var test = new BlockTestCase( 10, 10 );
+			var test = new TestCase( 10, 10 );
 			ExecTest( test );
 		}
 		[TestMethod]
 		public void CASE1c_10個7分割()
 		{
-			var test = new BlockTestCase( 10, 7 );
+			var test = new TestCase( 10, 7 );
 			ExecTest( test );
 		}
 		#endregion
@@ -34,21 +41,21 @@ namespace RandomizeUtilityTest
 		[TestMethod]
 		public void CASE2a_99個3分割()
 		{
-			var test = new BlockTestCase( 99, 3 );
+			var test = new TestCase( 99, 3 );
 			ExecTest( test );
 		}
 
 		[TestMethod]
 		public void CASE2a_256個4分割()
 		{
-			var test = new BlockTestCase( 256, 4 );
+			var test = new TestCase( 256, 4 );
 			ExecTest( test );
 		}
 
 		[TestMethod]
 		public void CASE2a_100個5分割()
 		{
-			var test = new BlockTestCase( 100, 5 );
+			var test = new TestCase( 100, 5 );
 			ExecTest( test );
 		}
 		#endregion
@@ -58,21 +65,21 @@ namespace RandomizeUtilityTest
 		[TestMethod]
 		public void CASE3a_100個33分割()
 		{
-			var test = new BlockTestCase( 100, 33 );
+			var test = new TestCase( 100, 33 );
 			ExecTest( test );
 		}
 
 		[TestMethod]
 		public void CASE3b_17個3分割()
 		{
-			var test = new BlockTestCase( 17, 3 );
+			var test = new TestCase( 17, 3 );
 			ExecTest( test );
 		}
 		
 		[TestMethod]
 		public void CASE3c_49個2分割()
 		{
-			var test = new BlockTestCase( 49, 2 );
+			var test = new TestCase( 49, 2 );
 			ExecTest( test );
 		}
 		#endregion
@@ -82,28 +89,28 @@ namespace RandomizeUtilityTest
 		[TestMethod]
 		public void CASE4a_10000個10分割()
 		{
-			var test = new BlockTestCase( 10000, 10 );
+			var test = new TestCase( 10000, 10 );
 			ExecTest( test );
 		}
 
 		[TestMethod]
 		public void CASE4b_20000個8分割()
 		{
-			var test = new BlockTestCase( 20000, 8 );
+			var test = new TestCase( 20000, 8 );
 			ExecTest( test );
 		}
 		
 		[TestMethod]
 		public void CASE4c_300個99分割()
 		{
-			var test = new BlockTestCase( 300, 99 );
+			var test = new TestCase( 300, 99 );
 			ExecTest( test );
 		}
 		
 		[TestMethod]
 		public void CASE4d_1000個999分割()
 		{
-			var test = new BlockTestCase( 1000, 999 );
+			var test = new TestCase( 1000, 999 );
 			ExecTest( test );
 		}
 		
@@ -113,7 +120,7 @@ namespace RandomizeUtilityTest
 		[TestMethod]
 		public void CASE4e_9973個13分割()
 		{
-			var test = new BlockTestCase( 9973, 13 );
+			var test = new TestCase( 9973, 13 );
 			ExecTest( test );
 		}
 		#endregion
@@ -127,8 +134,8 @@ namespace RandomizeUtilityTest
 		/// 分割後の詳細な内容をテストします。
 		/// </remarks>
 		/// <param name="test">テストケース（テストの実行条件）</param>
-		/// <seealso cref="BlockTestCase"/>
-		private void ExecTest( BlockTestCase test )
+		/// <seealso cref="TestCase"/>
+		private void ExecTest( TestCase test )
 		{
 			var blocks = Block.As( test.S, test.N );
 
