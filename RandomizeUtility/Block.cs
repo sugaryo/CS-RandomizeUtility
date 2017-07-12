@@ -39,13 +39,20 @@ namespace RandomizeUtility
 
 			// N回のブロック生成を行う。
 			decimal index = 0m;
+			
+			int tail = size - 1;
+			int last = n - 1;
+
 			for ( int i = 0; i < n; i++ )
 			{
 				int begin = (int)Math.Ceiling(index);
 
 				index += seeksize;
-
-				int end = (int)Math.Ceiling(index)-1;
+				
+				int end 
+					= i == last
+					? tail
+					: (int)Math.Ceiling( index ) - 1;
 
 				Block block = new Block(begin, end);
 				blocks.Add( block );
