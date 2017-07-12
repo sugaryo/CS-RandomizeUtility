@@ -20,7 +20,7 @@ namespace RandomizeUtility
 
 		public IEnumerable<int> AsIndexes()
 		{
-			for ( int i = this.Begin; i < this.Count; i++ )
+			for ( int i = this.Begin; i <= this.End; i++ )
 			{
 				yield return i;
 			}
