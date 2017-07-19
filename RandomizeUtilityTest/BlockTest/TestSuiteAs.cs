@@ -78,6 +78,9 @@ namespace RandomizeUtilityTest.BlockTest
 		/// <seealso cref="TestCase"/>
 		private void ExecTest( TestCase test )
 		{
+			Console.WriteLine( "テスト条件.要素数：" + test.S.ToString( "#,###" ) );
+			Console.WriteLine( "テスト条件.分割数：" + test.N.ToString( "#,###" ) );
+
 			var blocks = Block.As( test.S, test.N );
 			
 			foreach ( var block in blocks )
