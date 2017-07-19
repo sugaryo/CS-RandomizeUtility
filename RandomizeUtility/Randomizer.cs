@@ -79,68 +79,48 @@ namespace RandomizeUtility
 
 		private IEnumerable<T> Core( int count )
 		{
-            if ( count < 0 )
+			// 抽出数が 0以下 の場合は空の列挙を返す。
+            if ( count <= 0 )
             {
                 return Enumerable.Empty<T>();
             }
 
+			// 抽出数が 全要素以上 の場合は要素全体を返す。
             int size = this.source.Count();
             if ( size <= count )
             {
                 return this.source;
             }
 
+#warning 【改善】↓抽出数が全体の要素数に近づくにつれてランダム性が落ちるので、半数以上抽出する場合は逆ロジックを作りたい。
 
-            int step = size / count;
-
-            return step <= 1
-                ? this.Skip( size, size - count )
-                : this.Take( size, count, step );
+			// 上記以外（全要素から部分を抽出する必要がある場合）はExtractで抽出する。
+			return Extract( size, count );
 		}
+		/// <summary>
+		/// ランダム抽出
+		/// </summary>
+		/// <param name="size">要素数</param>
+		/// <param name="count">抽出数</param>
+		/// <returns> <seealso cref="source"/> から 指定された抽出数の要素を返す列挙 </returns>
+		private IEnumerable<T> Extract(int size, int count)
+		{
+			// 要素全体を指定の抽出数でブロック分割し、各ブロックから一件だけ要素を返す。
+			// ブロック内の一件に関しては乱数（r.Next）を用いてランダムに抽出する。
+			// ※ 現在のロジックでは、↑の方の warning にも書いた通り、
+			//    ブロックのサイズが小さくなればなるほど、ランダム性は落ちる。
+			//    抽出数が大きくなればなる程、分割されたブロックは小さくなり、
+			//    乱数の及ぼす影響範囲が狭くなる為である。
+			//    極論、全要素を抽出する場合、ブロックサイズが 1 になりランダム性は無くなる。
+			var blocks = Block.As( size, count );
 
+			foreach ( Block block in blocks )
+			{
+				int dx = r.Next( 0, block.Count );
+				int index = block.Begin + dx;
 
-        // 指定した回数スキップする列挙：
-
-        private IEnumerable<T> Skip( int size, int count )
-        {
-            int step = size / count;
-            int tail = size - 1;
-
-#warning ここのロジックバグってる、要修正。
-			for ( int n = 0; n < count; n++ )
-            {
-                int i = n * step;
-                int d = r.Next( 0, step );
-
-                int skip = Math.Min( i + d, tail );
-
-                for ( int x = 0; x < step; x++ )
-                {
-                    int index = i + x;
-
-                    if ( index == skip ) continue;
-                    if ( tail < index ) yield break;
-
-                    yield return this.source.ElementAt( index );
-                }
-            }
-        }
-
-
-        // 指定した回数実行する列挙：
-		
-        private IEnumerable<T> Take( int size, int count, int step )
-        {
-            int tail = size - 1;
-
-            for ( int n = 0; n < count; n++ )
-            {
-                int i = n * step;
-                int d = r.Next( 0, step );
-
-                int index = Math.Min( i + d, tail );
-                yield return this.source.ElementAt( index );
-            }
-        }
+				yield return this.source.ElementAt( index );
+			}
+		}
     }
 }
