@@ -91,35 +91,64 @@ namespace RandomizeUtility
             {
                 return this.source;
             }
+			
 
-#warning 【改善】↓抽出数が全体の要素数に近づくにつれてランダム性が落ちるので、半数以上抽出する場合は逆ロジックを作りたい。
 
-			// 上記以外（全要素から部分を抽出する必要がある場合）はExtractで抽出する。
-			return Extract( size, count );
+			int half = size / 2;
+			if ( half < count )
+			{
+				// 抽出数が半数を超える場合は逆ロジック。
+				// 　全体 S個 の要素から「 N個 抽出する 」ロジックを
+				// 　全体 S個 の要素から「 (S-N)個 抽出しない 」ロジックにする。
+				return Skip( size, size - count );
+			}
+			else
+			{
+				// 抽出数が半分以下なら通常ロジック。
+				return Take( size, count );
+			}
 		}
+		
 		/// <summary>
-		/// ランダム抽出
+		/// ランダム抽出（正）
 		/// </summary>
 		/// <param name="size">要素数</param>
 		/// <param name="count">抽出数</param>
 		/// <returns> <seealso cref="source"/> から 指定された抽出数の要素を返す列挙 </returns>
-		private IEnumerable<T> Extract(int size, int count)
+		private IEnumerable<T> Take(int size, int count)
 		{
-			// 要素全体を指定の抽出数でブロック分割し、各ブロックから一件だけ要素を返す。
-			// ブロック内の一件に関しては乱数（r.Next）を用いてランダムに抽出する。
-			// ※ 現在のロジックでは、↑の方の warning にも書いた通り、
-			//    ブロックのサイズが小さくなればなるほど、ランダム性は落ちる。
-			//    抽出数が大きくなればなる程、分割されたブロックは小さくなり、
-			//    乱数の及ぼす影響範囲が狭くなる為である。
-			//    極論、全要素を抽出する場合、ブロックサイズが 1 になりランダム性は無くなる。
 			var blocks = Block.As( size, count );
-
 			foreach ( Block block in blocks )
 			{
+				// 各ブロック毎に一件だけ、返却する要素をランダムに決定する。
 				int dx = r.Next( 0, block.Count );
 				int index = block.Begin + dx;
 
 				yield return this.source.ElementAt( index );
+			}
+		}
+
+		/// <summary>
+		/// ランダム抽出（反転）
+		/// </summary>
+		/// <param name="size">要素数</param>
+		/// <param name="count">スキップ数</param>
+		/// <returns> <seealso cref="source"/> から 指定されたスキップ数の要素を除いて返す列挙 </returns>
+		private IEnumerable<T> Skip( int size, int count )
+		{
+			var blocks = Block.As( size, count );
+			foreach ( Block block in blocks )
+			{
+				// 各ブロック毎に一件だけ、スキップする要素をランダムに決定する。
+				int dx = r.Next( 0, block.Count );
+				int skip = block.Begin + dx;
+
+				foreach ( int index in block.AsIndexes() )
+				{
+					if ( index == skip ) continue;
+
+					yield return this.source.ElementAt( index );
+				}
 			}
 		}
     }
