@@ -56,6 +56,9 @@
     <Compile Include="BlockTest\TestCase.cs" />
     <Compile Include="BlockTest\TestSuiteDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomizerTest\ContextMap.cs" />
+    <Compile Include="RandomizerTest\TestCase.cs" />
+    <Compile Include="RandomizerTest\TestSuite.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RandomizeUtility\RandomizeUtility.csproj">
