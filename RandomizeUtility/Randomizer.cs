@@ -36,11 +36,14 @@ namespace RandomizeUtility
 
 		#region ctor
 		/// <param name="source">ランダム抽出する要素の母体</param>
-		public Randomizer( IEnumerable<T> source )
+		/// <param name="seed">乱数のシード値</param>
+		public Randomizer( IEnumerable<T> source, int? seed = null )
         {
             this.source = source;
-            this.r = new Random();
-        }
+			this.r = null == seed 
+				? new Random() 
+				: new Random( seed.Value );
+		}
 		#endregion
 
 
